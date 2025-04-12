@@ -1,0 +1,27 @@
+{% extends "base/base.html" %}
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+
+    <section class="bg-white p-4 rounded shadow-sm text-center mb-5">
+        <h2 class="h5 mb-4">Faça sua denúncia anônima.</h2>
+        <p class="text-start">
+            Texto bonito sobre cultura da empresa e etcs. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel tristique nulla. Et netus et malesuada fames ac turpis egestas. 
+            Integer nec sem vitae nisi vehicula ullamcorper. In fermentum nunc non tortor iaculis, sit amet cursus sapien tincidunt.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel tristique nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+            Integer nec sem vitae nisi vehicula ullamcorper. In fermentum nunc non tortor iaculis, sit amet cursus sapien tincidunt.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel tristique nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+            Integer nec sem vitae nisi vehicula ullamcorper. In fermentum nunc non tortor iaculis, sit amet cursus sapien tincidunt.
+        </p>
+        <a href="/denuncia/abrir" class="btn btn-danger">Abrir denúncia</a>
+    </section>
+
+    <section class="bg-white p-4 rounded shadow-sm mb-4">
+        <h2 class="h5 mb-4">Consultar denúncia</h2>
+        <form action="" method="post" class="d-flex gap-2 flex-column flex-sm-row">
+            <input type="text" name="chave" class="form-control" placeholder="Digite o código da denúncia">
+            <button type="submit" class="btn btn-primary">Consultar</button>
+        </form>
+    </section>
+
+{% endblock %}
