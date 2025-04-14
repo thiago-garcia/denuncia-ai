@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from .forms import DenunciaForm
 
@@ -8,8 +9,19 @@ def nova(request):
         form = DenunciaForm(request.POST)
 
         if form.is_valid():
-            pass
+            chave = 'ABCDE12345'
+            request.session['chave_acesso'] = chave
+            return redirect(reverse('denuncias:sucesso'))
     else:
         form = DenunciaForm()
 
     return render(request, 'denuncias/form_denuncia.html', {'form': form})
+
+
+def sucesso(request):
+    chave_acesso = request.session.pop('chave_acesso', None)
+
+    if not chave_acesso:
+        return redirect(reverse('denuncias:nova'))
+
+    return render(request, 'denuncias/sucesso_denuncia.html', {'chave_acesso': chave_acesso})
