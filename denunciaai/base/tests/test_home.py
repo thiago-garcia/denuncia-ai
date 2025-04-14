@@ -19,7 +19,7 @@ def test_form_consulta(resp):
 
 
 def test_form_input_chave(resp):
-    dj_assert_contains(resp, '<input type="text" name="chave"')
+    dj_assert_contains(resp, '<input type="text" name="chave_acesso"')
 
 
 def test_link_abrir_denuncia(resp):

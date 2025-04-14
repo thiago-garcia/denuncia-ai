@@ -18,8 +18,9 @@
 
     <section class="bg-white p-4 rounded shadow-sm mb-4">
         <h2 class="h5 mb-4">Consultar denúncia</h2>
-        <form action="" method="post" class="d-flex gap-2 flex-column flex-sm-row">
-            <input type="text" name="chave" class="form-control" placeholder="Digite o código da denúncia">
+        <form action="{% url 'denuncias:consulta' %}" method="post" class="d-flex gap-2 flex-column flex-sm-row">
+            {% csrf_token %}
+            <input type="text" name="chave_acesso" class="form-control" placeholder="Digite o código da denúncia">
             <button type="submit" class="btn btn-primary">Consultar</button>
         </form>
     </section>
