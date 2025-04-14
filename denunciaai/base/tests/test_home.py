@@ -23,7 +23,7 @@ def test_form_input_chave(resp):
 
 
 def test_link_abrir_denuncia(resp):
-    dj_assert_contains(resp, '<a href="/denuncia/abrir"')
+    dj_assert_contains(resp, '<a href="%s' % reverse('denuncias:nova'))
 
 
 def test_link_restrito(resp):
