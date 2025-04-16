@@ -1,7 +1,10 @@
+import secrets
+import string
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .forms import DenunciaForm
+from .models import Denuncia
 
 
 def nova(request):
@@ -9,7 +12,16 @@ def nova(request):
         form = DenunciaForm(request.POST)
 
         if form.is_valid():
-            chave = 'ABCDE12345'
+
+            caracteres = string.ascii_uppercase + string.digits
+            chave = ''.join(secrets.choice(caracteres) for _ in range(10))
+            while Denuncia.objects.filter(chave_acesso=chave).exists():
+                chave = ''.join(secrets.choice(caracteres) for _ in range(10))
+
+            denuncia = form.save(commit=False)
+            denuncia.chave_acesso = chave
+            denuncia.save()
+
             request.session['chave_acesso'] = chave
             return redirect(reverse('denuncias:sucesso'))
     else:
