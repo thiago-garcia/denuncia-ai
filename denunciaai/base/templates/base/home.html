@@ -20,7 +20,7 @@
         <h2 class="h5 mb-4">Consultar denúncia</h2>
         <form action="{% url 'denuncias:consulta' %}" method="post" class="d-flex gap-2 flex-column flex-sm-row">
             {% csrf_token %}
-            <input type="text" name="chave_acesso" class="form-control" placeholder="Digite o código da denúncia">
+            <input type="text" name="chave_acesso" class="form-control" placeholder="Digite a chave de acesso da denúncia" required>
             <button type="submit" class="btn btn-primary">Consultar</button>
         </form>
     </section>

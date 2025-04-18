@@ -41,10 +41,12 @@ def sucesso(request):
 def consulta(request):
     if request.method == 'POST':
         chave_acesso = request.POST['chave_acesso']
-        denuncia = {}
-        if chave_acesso == 'ABCDE12345':
-            denuncia['assunto'] = 'Teste assunto'
-            denuncia['mensagem'] = 'Teste mensagem'
+        denuncia = None
+        try:
+            denuncia = Denuncia.objects.get(chave_acesso=chave_acesso.upper())
+        except Denuncia.DoesNotExist:
+            pass
+
         return render(request, 'denuncias/consulta_denuncia.html', {'denuncia': denuncia})
     else:
         return redirect(reverse('base:home'))
