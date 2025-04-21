@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.crypto import get_random_string
 
 
 class Denuncia(models.Model):
@@ -10,3 +11,14 @@ class Denuncia(models.Model):
 
     def __str__(self):
         return self.assunto
+
+    def _gerar_chave_acesso(self):
+        chave = get_random_string(10).upper()
+        while Denuncia.objects.filter(chave_acesso=chave).exists():
+            chave = get_random_string(10).upper()
+        return chave
+
+    def save(self, *args, **kwargs):
+        if not self.chave_acesso:
+            self.chave_acesso = self._gerar_chave_acesso()
+        super().save(*args, **kwargs)
