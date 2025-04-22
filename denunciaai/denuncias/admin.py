@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from .models import Denuncia
+from .models import Denuncia, Comentario
 
 
 class DenunciaForm(forms.ModelForm):
@@ -13,6 +13,14 @@ class DenunciaForm(forms.ModelForm):
         }
 
 
+class ComentarioInline(admin.StackedInline):
+    model = Comentario
+    readonly_fields = ('criado_em',)
+    autocomplete_fields = ('usuario',)
+    ordering = ('-criado_em',)
+    extra = 0
+
+
 @admin.register(Denuncia)
 class DenunciaAdmin(admin.ModelAdmin):
     form = DenunciaForm
@@ -20,6 +28,7 @@ class DenunciaAdmin(admin.ModelAdmin):
     search_fields = ('assunto', 'chave_acesso', 'criada_em', 'encerrada')
     list_filter = ('criada_em', 'encerrada')
     ordering = ('-criada_em',)
+    inlines = [ComentarioInline]
 
     @admin.display(description='Assunto')
     def admin_assunto(self, obj):

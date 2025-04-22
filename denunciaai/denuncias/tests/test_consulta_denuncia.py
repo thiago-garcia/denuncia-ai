@@ -4,7 +4,7 @@ from django.utils.timezone import localtime
 from model_bakery import baker
 
 from denunciaai.django_assertions import dj_assert_contains
-from denunciaai.denuncias.models import Denuncia
+from denunciaai.denuncias.models import Denuncia, Comentario
 
 
 @pytest.fixture
@@ -13,7 +13,17 @@ def denuncia(db):
 
 
 @pytest.fixture
-def resp(client, denuncia):
+def usuario(db, django_user_model):
+    return baker.make(django_user_model, first_name='Fulano')
+
+
+@pytest.fixture
+def comentarios(denuncia, usuario):
+    return baker.make(Comentario, 3, denuncia=denuncia, usuario=usuario)
+
+
+@pytest.fixture
+def resp(client, denuncia, comentarios):
     resp = client.post(reverse('denuncias:consulta'), {'chave_acesso': denuncia.chave_acesso})
     return resp
 
@@ -38,6 +48,22 @@ def test_denuncia_criada_em(resp, denuncia):
 def test_denuncia_status(resp, denuncia):
     status = 'Encerrada' if denuncia.encerrada else 'Aberta'
     dj_assert_contains(resp, f'Status: {status}')
+
+
+def test_comentarios_usuario(resp, comentarios):
+    for comentario in comentarios:
+        dj_assert_contains(resp, comentario.usuario.first_name)
+
+
+def test_comentarios_criada_em(resp, comentarios):
+    for comentario in comentarios:
+        criado_em = localtime(comentario.criado_em).strftime('%d/%m/%Y, %H:%M')
+        dj_assert_contains(resp, criado_em)
+
+
+def test_comentarios_mensagem(resp, comentarios):
+    for comentario in comentarios:
+        dj_assert_contains(resp, comentario.mensagem)
 
 
 @pytest.fixture

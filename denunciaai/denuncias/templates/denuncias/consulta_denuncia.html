@@ -13,6 +13,20 @@
             <p>
                 {{ denuncia.mensagem|linebreaksbr }}
             </p>
+            <ul class="list-group list-group-flush">
+                <h6>Comentários</h6>
+                {% for comentario in comentarios %}
+                    <li class="list-group-item">
+                        <p>
+                            {{ comentario.usuario.first_name }} - {{ comentario.criado_em|date:'d/m/Y, H:i' }}
+                        </p>                       
+                        <p>
+                            {{ comentario.mensagem }}
+                        </p>
+                                               
+                    </li>
+                {% endfor %}
+            </ul>
         {% else %}
             <h2 class="h5 mb-4">Denúncia não encontrada</h2>
         {% endif %}
