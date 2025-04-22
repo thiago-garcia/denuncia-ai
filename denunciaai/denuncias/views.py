@@ -30,12 +30,13 @@ def sucesso(request):
 def consulta(request):
     if request.method == 'POST':
         chave_acesso = request.POST['chave_acesso']
-        denuncia = None
         try:
             denuncia = Denuncia.objects.get(chave_acesso=chave_acesso.upper())
+            comentarios = denuncia.comentario_set.order_by('criado_em').all()
         except Denuncia.DoesNotExist:
-            pass
+            denuncia = None
+            comentarios = None
 
-        return render(request, 'denuncias/consulta_denuncia.html', {'denuncia': denuncia})
+        return render(request, 'denuncias/consulta_denuncia.html', {'denuncia': denuncia, 'comentarios': comentarios})
     else:
         return redirect(reverse('base:home'))
