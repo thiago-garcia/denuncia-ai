@@ -1,0 +1,41 @@
+{% extends "base/base.html" %}
+{% block title %}Área Restrita{% endblock %}
+
+{% block content %}
+
+<div class="bg-white rounded shadow-sm p-3 mb-4">
+    <div class="row">
+        <nav class="col-md-3 col-lg-2 border-end pe-3 mb-3 mb-md-0">
+            <h5 class="mb-4">Administração</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item text-uppercase text-muted small fw-semibold">
+                    Denúncias
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center text-dark" href="#">
+                        <i class="bi bi-folder2-open me-2"></i> Abertas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center text-dark" href="#">
+                        <i class="bi bi-archive me-2"></i> Encerradas
+                    </a>
+                </li>
+                <li class="nav-item text-uppercase text-muted small fw-semibold">
+                    Conta
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center text-dark" href="#">
+                        <i class="bi bi-box-arrow-right me-2"></i> Sair
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="col-md-9 col-lg-10">
+            {% block admin_content %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

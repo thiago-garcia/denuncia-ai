@@ -35,14 +35,15 @@ AUTH_USER_MODEL = 'base.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'denunciaai.base',
+    'denunciaai.denuncias',
+    'denunciaai.restrito',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'denunciaai.base',
-    'denunciaai.denuncias',
 ]
 
 MIDDLEWARE = [

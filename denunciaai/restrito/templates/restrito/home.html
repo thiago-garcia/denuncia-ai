@@ -1,0 +1,13 @@
+{% extends "restrito/base.html" %}
+
+{% block admin_content %}
+    <h2 class="h5 mb-3">Listagem de denúncias abertas</h2>
+    <ul class="list-group">
+        {% for a in '123456789'|make_list %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Denúncia {{ a }}
+            <a href="#" class="btn btn-outline-primary btn-sm">Visualizar</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
