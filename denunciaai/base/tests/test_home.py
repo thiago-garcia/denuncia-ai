@@ -27,4 +27,4 @@ def test_link_abrir_denuncia(resp):
 
 
 def test_link_restrito(resp):
-    dj_assert_contains(resp, '<a href="/restrito"')
+    dj_assert_contains(resp, '<a href="%s' % reverse('restrito:home'))
