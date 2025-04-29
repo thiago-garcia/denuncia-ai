@@ -31,6 +31,11 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # Customizacao do User
 AUTH_USER_MODEL = 'base.User'
 
+# Login URLs
+
+LOGIN_URL = '/contas/login/'
+LOGIN_REDIRECT_URL = '/restrito/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
